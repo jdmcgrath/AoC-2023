@@ -2,6 +2,8 @@
 
 Hey Team! Welcome to my not-so-secret lair where I'm stashing my solutions for the Advent of Code 2023. It's like an escape room, but for coders and way cooler. 🎩🐇
 
+![Cute Elf Image](readmeImage.png "Cute Elf Image")
+
 ## What's Cooking? 🍳
 
 We're diving into the whimsical world of coding puzzles with Advent of Code 2023. I'm rolling up my sleeves and diving into these puzzles with our good old friend, GoLang. Expect some neat tricks and possibly a few facepalms. 🤦‍♂️💻
@@ -15,7 +17,7 @@ Here's how I'm structuring my digital playground:
 - ... you get the drift.
 
 Each folder is a mini adventure featuring:
-- That day's brain teaser.
+- That day's brain-teaser.
 - My GoLang solution (with generous comments for when future me forgets what past me was thinking).
 - Random musings and probably a meme or two.
 
