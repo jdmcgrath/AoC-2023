@@ -22,7 +22,7 @@ func processFile(path string) {
 	}()
 	fileScanner := bufio.NewScanner(readFile)
 
-	re := regexp.MustCompile("[0-9]+")
+	re := regexp.MustCompile("[0-9]+") // Compiles a regex to find all numeric strings
 	runningCount := 0
 	for fileScanner.Scan() {
 		runningCount += processLine(fileScanner.Text(), re)
@@ -31,11 +31,11 @@ func processFile(path string) {
 }
 
 func processLine(line string, re *regexp.Regexp) int {
-	digitsInString := re.FindAllString(line, -1)
-	digitsString := strings.Join(digitsInString, "")
+	digitsInString := re.FindAllString(line, -1)     // Extracts all numeric strings from the line
+	digitsString := strings.Join(digitsInString, "") // Joins all numeric strings into one
 	first, last := getFirstAndLastFromString(digitsString)
 	calibrationString := first + last
-	calibrationInt, err := strconv.Atoi(calibrationString)
+	calibrationInt, err := strconv.Atoi(calibrationString) // Converts the string to an integer
 	aoc.Check(err)
 	return calibrationInt
 }
