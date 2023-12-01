@@ -4,7 +4,7 @@ Hey Team! Welcome to my not-so-secret lair where I'm stashing my solutions for t
 
 ## What's Cooking? 🍳
 
-We're diving into the whimsical world of coding puzzles with Advent of Code 2023. I'm rolling up my sleeves and diving into these puzzles with our good old friend, GoLang, and maybe a bit of Lambda magic. Expect some neat tricks and possibly a few facepalms. 🤦‍♂️💻
+We're diving into the whimsical world of coding puzzles with Advent of Code 2023. I'm rolling up my sleeves and diving into these puzzles with our good old friend, GoLang. Expect some neat tricks and possibly a few facepalms. 🤦‍♂️💻
 
 ## Repo Deets 🗂
 
@@ -21,15 +21,15 @@ Each folder is a mini adventure featuring:
 
 ## Running the Circus 🎪
 
-Check each day's folder for a "How to Run" guide. It's pretty straightforward, but if it catches fire, you didn't see anything.
+Check each day's folder for the main.go, and give it a run! It's pretty straightforward, but if it catches fire, you didn't see anything.
 
 ## Chime In 📣
 
-Since we're all in this together, feel free to drop your thoughts, laugh at my bugs, or share your wizardry. Just no spoilers for the upcoming puzzles, or the Elves will get you.
+Since we're all in this together, feel free to drop your thoughts, laugh at my bugs, or share your wizardry. Just no spoilers for puzzles I haven't gotten around to yet, or the Elves will get you.
 
 ## Stay Connected 🤙
 
-You know where to find me. For any non-Advent of Code related shenanigans, catch me at the usual spot (probably near the coffee machine).
+You know where to find me. For any non-Advent of Code related shenanigans, catch me at the usual spot (scratching my head at my desk about another insurance shenanigan).
 
 ## The Boring Stuff 📜
 
