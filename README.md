@@ -2,7 +2,8 @@
 
 Hey Team! Welcome to my not-so-secret lair where I'm stashing my solutions for the Advent of Code 2023. It's like an escape room, but for coders and way cooler. 🎩🐇
 
-![Cute Elf Image](readmeImage.png "Cute Elf Image")
+<img src="readmeImage.png" alt="Cute elf image" style="height: 100px; width:100px;"/>
+
 
 ## What's Cooking? 🍳
 
