@@ -2,6 +2,7 @@ package main
 
 import (
 	"bufio"
+	"errors"
 	"fmt"
 	aoc "github.com/jdmcgrath/AoC-2023"
 	"os"
@@ -28,67 +29,72 @@ func processFile(path string) {
 	fmt.Println(runningCount)
 }
 
-func processLine(line string) int {
-	digitsInString := getDigitsInString(line)
-	digitsString := strings.Join(digitsInString, "")
-	first, last := getFirstAndLastFromString(digitsString)
-	justTwoDigits := first + last
-	calib, err := strconv.Atoi(justTwoDigits)
+func processLine(l string) int {
+	textNumbers := map[string]rune{
+		"zero":  '0',
+		"one":   '1',
+		"two":   '2',
+		"three": '3',
+		"four":  '4',
+		"five":  '5',
+		"six":   '6',
+		"seven": '7',
+		"eight": '8',
+		"nine":  '9',
+	}
+	firstDigit, err := getFirstDigitInLine(l, textNumbers)
 	aoc.Check(err)
-	println(calib)
-	return calib
+
+	lastDigit, err := getLastDigitInLine(l, textNumbers)
+	aoc.Check(err)
+
+	stringNumber := string(firstDigit) + string(lastDigit)
+	intNumber, err := strconv.Atoi(stringNumber)
+	aoc.Check(err)
+
+	return intNumber
 }
 
-func getDigitsInString(s string) []string {
-	var digits []string
-	var wordBuilder strings.Builder
-	textNumbers := map[string]string{
-		"zero":  "0",
-		"one":   "1",
-		"two":   "2",
-		"three": "3",
-		"four":  "4",
-		"five":  "5",
-		"six":   "6",
-		"seven": "7",
-		"eight": "8",
-		"nine":  "9",
-	}
-
-	for _, r := range s {
-		if unicode.IsDigit(r) {
-			digits = append(digits, string(r))
-			wordBuilder.Reset()
-		} else if unicode.IsLetter(r) {
-			wordBuilder.WriteRune(r)
-			// Check if wordBuilder contains any of the text numbers
-			for word, number := range textNumbers {
-				if strings.Contains(wordBuilder.String(), word) {
-					digits = append(digits, number)
-					wordBuilder.Reset()
-					break
+func getFirstDigitInLine(l string, digitStrings map[string]rune) (rune, error) {
+	var sb strings.Builder
+	for _, char := range l {
+		if unicode.IsDigit(char) {
+			return char, nil
+		} else {
+			sb.WriteRune(char)
+			for digitString, digit := range digitStrings {
+				if strings.HasSuffix(sb.String(), digitString) {
+					return digit, nil
 				}
 			}
-		} else {
-			wordBuilder.Reset()
 		}
 	}
-
-	// Check for the last word after the loop
-	for word, number := range textNumbers {
-		if strings.Contains(wordBuilder.String(), word) {
-			digits = append(digits, number)
-			break
-		}
-	}
-
-	return digits
+	return '0', errors.New("could not find a digit")
 }
 
-func getFirstAndLastFromString(inputString string) (first, last string) {
-	if len(inputString) > 0 {
-		first = string(inputString[0])
-		last = string(inputString[len(inputString)-1])
+func getLastDigitInLine(l string, digitStrings map[string]rune) (rune, error) {
+	var sb strings.Builder
+	reversed := reverse(l)
+	for _, char := range reversed {
+		if unicode.IsDigit(char) {
+			return char, nil
+		} else {
+			sb.WriteRune(char)
+			reversedSb := reverse(sb.String())
+			for digitString, digit := range digitStrings {
+				if strings.HasPrefix(reversedSb, digitString) {
+					return digit, nil
+				}
+			}
+		}
 	}
-	return first, last
+	return '0', errors.New("could not find a digit")
+}
+
+func reverse(s string) string {
+	runes := []rune(s)
+	for i, j := 0, len(runes)-1; i < j; i, j = i+1, j-1 {
+		runes[i], runes[j] = runes[j], runes[i]
+	}
+	return string(runes)
 }
