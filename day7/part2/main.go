@@ -57,10 +57,54 @@ func parseInput(filePath string) ([]Hand, error) {
 	return hands, scanner.Err()
 }
 
-// classifyAndSortHands classifies the hands based on their type and sorts them
+// classifyHandWithJoker classifies the hand with J as a wildcard and returns its type
+func classifyHandWithJoker(cards string) HandType {
+	counts := make(map[rune]int)
+	jokerCount := 0
+
+	for _, card := range cards {
+		if card == 'J' {
+			jokerCount++
+			continue
+		}
+		counts[card]++
+	}
+
+	// Try to use the Jokers to form the strongest possible hand
+	if jokerCount > 0 {
+		maxCount := 0
+		for _, count := range counts {
+			if count > maxCount {
+				maxCount = count
+			}
+		}
+		maxCountWithJoker := maxCount + jokerCount
+
+		switch {
+		case maxCountWithJoker == 5:
+			return FiveOfAKind
+		case maxCountWithJoker == 4:
+			return FourOfAKind
+		case maxCountWithJoker == 3:
+			if len(counts) == 1 || len(counts) == 2 {
+				return FullHouse
+			}
+			return ThreeOfAKind
+		case maxCountWithJoker == 2:
+			if len(counts)+jokerCount == 2 {
+				return FullHouse // Case like JJ333
+			}
+			return TwoPair
+		}
+	}
+
+	// Standard classification if no joker or joker doesn't change the type
+	return classifyHand(cards)
+}
+
 func classifyAndSortHands(hands []Hand) {
 	for i, hand := range hands {
-		hands[i].Type = classifyHand(hand.Cards)
+		hands[i].Type = classifyHandWithJoker(hand.Cards)
 	}
 
 	sort.Slice(hands, func(i, j int) bool {
